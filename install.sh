@@ -35,8 +35,12 @@ influx -database "casa" -execute "grant all privileges on casa to casa"
 wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
 echo "deb https://packages.grafana.com/oss/deb stable main" | sudo tee /etc/apt/sources.list.d/grafana.list
 
-sudo apt update && sudo apt install -y grafana
+apt update && apt install -y grafana
 
-sudo systemctl unmask grafana-server.service
-sudo systemctl start grafana-server
-sudo systemctl enable grafana-server.service
+systemctl unmask grafana-server.service
+systemctl start grafana-server
+systemctl enable grafana-server.service
+
+# Mosquitto
+apt-get install -y mosquitto mosquitto-clients
+systemctl enable mosquitto.service
