@@ -40,6 +40,8 @@ apt-get install -y mosquitto mosquitto-clients
 systemctl enable mosquitto.service
 
 # Patch Node-Red
+node-red-stop
+cp ./skeletonFlow.json /root/.node-red/flows_raspberry.json
 cd /root/.node-red
 npm install --save node-red-contrib-influxdb
 npm install --save node-red-contrib-gsi
@@ -48,3 +50,6 @@ npm install --save node-red-contrib-persist
 npm install --save node-red-contrib-tplink-smarthome
 npm install --save node-red-contrib-fritzapi
 npm install --save node-red-contrib-fritz
+
+# Cleanup with a Reboot
+reboot
