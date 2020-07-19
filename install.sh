@@ -38,3 +38,13 @@ systemctl enable grafana-server.service
 # Mosquitto
 apt-get install -y mosquitto mosquitto-clients
 systemctl enable mosquitto.service
+
+# Patch Node-Red
+cd /root/.node-red
+npm install --save node-red-contrib-influxdb
+npm install --save node-red-contrib-gsi
+npm install --save node-red-node-openweathermap
+npm install --save node-red-contrib-persist
+npm install --save node-red-contrib-tplink-smarthome
+npm install --save node-red-contrib-fritzapi
+npm install --save node-red-contrib-fritz
