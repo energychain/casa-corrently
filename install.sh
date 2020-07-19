@@ -2,12 +2,6 @@
 
 apt-get update && apt-get upgrade -y && apt full-upgrade -y
 
-# Install Node JS
-cd packages
-./nodejs_14.sh
-
-apt install -y nodejs
-
 # Install Zerotier
 curl -s https://install.zerotier.com/ | /bin/bash
 zerotier-cli join 1d71939404f950a4
