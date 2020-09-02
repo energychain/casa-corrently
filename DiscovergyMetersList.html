@@ -1,0 +1,26 @@
+<script type="text/javascript">
+    RED.nodes.registerType('Available Meters',{
+        category: 'Corrently',
+        color: '#D7D7A0',
+        defaults: {
+            name: {value: null}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "font-awesome/fa-key",
+        label: function() {
+            return this.name||"Meters List";
+        }
+    });
+</script>
+<script type="text/x-red" data-template-name="Available Meters">
+    <div class="form-row">
+          <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+          <input type="text" id="node-input-name">
+    </div>
+</script>
+<script type="text/x-red" data-help-name="Available Meters">
+    <p>Helper node to feed a <code>ui_dropdown</code>.</p>
+    <h3>Output</h3>
+    <code>msg.payload = [{"Meter Label":"meterId"},{...}]</code>
+</script>

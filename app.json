@@ -1,0 +1,7 @@
+{
+  "name": "Casa Corrently with Discovergy Meter Backend",
+  "description": "Deploys a Casa Corrently environment for PV (Solar) Prosumers allowing to monitor economic conditions and compare with community results",
+  "repository": "https://github.com/energychain/node-red-contrib-discovergy-meter",
+  "logo": "https://www.corrently.de/transparenz/wp-content/uploads/2020/04/cropped-Corrently-Logo-Background-4.png",
+  "keywords": ["smartmeter", "discovergy", "corrently", "monitoring", "energy", "community"]
+}

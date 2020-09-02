@@ -1,0 +1,152 @@
+<script type="text/javascript">
+    RED.nodes.registerType('discovergy-config',{
+        category: 'config',
+        defaults: {
+             name: {
+               value: "",
+               required: false
+             }
+        },
+        credentials: {
+             username: {type: "text"},
+             password: {type: "password"}
+         },
+        label: function() {
+            return this.name ? this.name : "Discovergy Meter";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="discovergy-config">
+  <div class="form-row">
+    <label for="node-config-input-name"><i class="fa fa-tag"></i> <span data-i18n="node-red:common.label.name"></span></label>
+    <input type="text" id="node-config-input-name">
+  </div>
+    <div class="form-row">
+      <label for="node-config-input-username"><i class="fa fa-user"></i> <span data-i18n="node-red:common.label.username"></span></label>
+      <input type="text" id="node-config-input-username">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-password"><i class="fa fa-lock"></i> <span data-i18n="node-red:common.label.password"></span></label>
+        <input type="password" id="node-config-input-password">
+    </div>
+</script>
+
+
+
+<script type="text/javascript">
+    RED.nodes.registerType('Discovergy Meter',{
+        category: 'Corrently',
+        color: '#D7D7A0',
+        defaults: {
+            name: {value: null},
+            account: {required:true, type:"discovergy-config"},
+            meterId: {value: null,required:true},
+            firstReading: {value: 0,required:true},
+            firstReadingOut: {value: 0,required:true},
+            firstReadingDate: {value: null,required:false},
+            isProduction: {value: false,required:true},
+            revenue: {value: 0,required:true},
+            amortization: {value: 0,required:true},
+            prodMeterId: {value: null,required:false},
+            firstReadingProd: {value: 0,required:true}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "font-awesome/fa-dashboard",
+        label: function() {
+            return this.name||"DiscovergyMeter";
+        },
+        oneditprepare: async function () {
+              var node = this;
+              $.get('discovergy/meters?account='+node.account).done( function(data) {
+                    var meters = JSON.parse(data);
+                    for(let i=0;i<meters.length;i++) {
+                        $('#node-input-meterId').append('<option value="' + meters[i].meterId + '">' + meters[i].fullSerialNumber  + '</option>').val(node.meterId);
+                        $('#node-input-prodMeterId').append('<option value="' + meters[i].meterId + '">' + meters[i].fullSerialNumber  + '</option>').val(node.prodMeterId);
+                    }
+              });
+
+
+
+            return;
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="Discovergy Meter">
+    <div class="form-row">
+        <label for="node-input-account"><i class="fa fa-key"></i>Credentials</label>
+        <input type="text" id="node-input-account">
+    </div>
+
+    <div class="form-row">
+          <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+          <input type="text" id="node-input-name">
+    </div>
+
+    <div class="form-row">
+          <label for="node-input-meterId"><i class="icon-tag"></i> Meter</label>
+          <select id="node-input-meterId" name="node-input-meterId" style="width: 250px;"></select>
+    </div>
+    <hr/>
+    <div class="form-row">
+          <label for="node-input-firstReadingDate"><i class="icon-tag"></i> First Reading Date (overwrite)</label>
+          <input type="text" id="node-input-firstReadingDate" name="node-input-firstReadingDate" placeholder="2020-01-31">
+    </div>
+    <div class="form-row">
+          <label for="node-input-firstReading"><i class="icon-tag"></i> First Reading Energy (wh)</label>
+          <input type="text" id="node-input-firstReading" name="node-input-firstReading">
+    </div>
+    <div class="form-row">
+          <label for="node-input-firstReadingOut"><i class="icon-tag"></i> First Reading EnergyOut (wh)</label>
+          <input type="text" id="node-input-firstReadingOut" name="node-input-firstReadingOut">
+    </div>
+    <div class="form-row">
+          <label for="node-input-isProduction"><i class="icon-tag"></i> full Production to Grid (Messkonzept 1 ansonsten 2)</label>
+          <input type="checkbox" id="node-input-isProduction" name="node-input-isProduction">
+    </div>
+    <div class="form-row">
+          <label for="node-input-prodMeterId"><i class="icon-tag"></i> Production Meter</label>
+          <select id="node-input-prodMeterId" name="node-input-prodMeterId" style="width: 250px;"></select>
+    </div>
+    <div class="form-row">
+          <label for="node-input-firstReadingProd"><i class="icon-tag"></i> First Reading Production (wh)</label>
+          <input type="text" id="node-input-firstReadingProd" name="node-input-firstReadingProd">
+    </div>
+    <div class="form-row">
+          <label for="node-input-revenue"><i class="icon-tag"></i> revenue per kWh (Generation)</label>
+          <input type="number" id="node-input-revenue" name="node-input-revenue" placeholder="(0.12)">
+    </div>
+    <div class="form-row">
+          <label for="node-input-amortization"><i class="icon-tag"></i> amortization per year</label>
+          <input type="number" id="node-input-amortization" name="node-input-amortization" placeholder="(2500)">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="Discovergy Meter">
+    <p>Allows to use a Discovergy Meter with its readings to calculate measurements within the <a href="https://www.corrently.de/">Corrently Ecosystem</a>.</p>
+    <h3>Output (Standard)</h3>
+    <code>
+      msg.payload =  {
+        time: <TIME>, // time of reading per Discovergy API
+        latest: {
+          power: <POWERVALUE>,
+          power1: <POWERVALUE>,
+          power2: <POWERVALUE>,
+          power3: <POWERVALUE>,
+          energy: <ENERGYVALUE>,
+          energyOut: <ENERGYVALUE>,
+          baseCosts: <EUROVALUE>,
+          energyCost: <EUROVALUE>,
+          energyRevenue: <EUROVALUE>,
+          incomeSaldo: <EUROVALUE>
+        }
+      }
+      </code>
+      <h3>Online Support</h3>
+      <p>
+      You might reach out online using <a href="https://tawk.to/chat/5c53189451410568a109843f/default" target="_blank">our chat</a>,
+      Or refer to the <a href="https://github.com/energychain/node-red-contrib-discovergy-meter">Github Repository</a>.
+      </p>
+</script>
