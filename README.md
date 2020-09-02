@@ -3,8 +3,6 @@ Allows to work with a smartmeters (Electricity only) within Node RED flows. If y
 
 ![npm](https://img.shields.io/npm/dw/casa-corrently) [![Build Status](https://travis-ci.com/energychain/casa-corrently.svg?branch=master)](https://travis-ci.com/energychain/casa-corrently) [![Code Quality](https://www.code-inspector.com/project/12360/score/svg)](https://frontend.code-inspector.com/public/project/12360/casa-corrently/dashboard) [![chat](https://img.shields.io/badge/chat-support-brightgreen)](https://tawk.to/chat/5c53189451410568a109843f/default)
 
-## NOTE: new name
-This package gets renamed into **casa-corrently** - Previous: **casa-corrently**
 
 ## Installation
 
