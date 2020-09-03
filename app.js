@@ -1,7 +1,8 @@
 module.exports = async function() {
   let instance = {};
+  instance.meterLib = require("./lib/meter.js");
   instance.server = async function(config) {
-    const meterLib = require("./lib/meter.js");
+    const meterLib = instance.meterLib;
     const fs = require("fs");
     const express = require('express');
     const bodyParser = require('body-parser');
