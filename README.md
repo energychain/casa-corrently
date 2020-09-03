@@ -148,7 +148,7 @@ Gerhard Weiser Ring 29  <br/>
 69256 Mauer  <br/>
 Germany  <br/>
   <br/>
-+49 6226 968 009 0  <br/>
+tel: +49 6226 968 009 0  <br/>
   <br/>
 kontakt@stromdao.com  <br/>
   <br/>
