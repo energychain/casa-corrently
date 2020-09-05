@@ -1,13 +1,13 @@
 {
   "name": "casa-corrently",
-  "version": "0.9.9",
+  "version": "1.0.0",
   "description": "Casa Corrently EcoSystem - Standalone and Node-RED",
   "main": "app.js",
   "scripts": {
     "test": "mocha",
     "demo-messkonzept1": "node-red ./flows/demo_messkonzept1.json",
     "demo-messkonzept2": "node-red ./flows/demo_messkonzept2.json",
-    "start": "nodemon --ignore flows/ --ignore lib/ --ignore public/ ./standalone.js",
+    "start": "node ./standalone.js",
     "standalone-messkonzept0": "nodemon --ignore flows/ --ignore lib/ --ignore public/ ./standalone.js ./flows/demo_messkonzept0.json",
     "standalone-messkonzept1": "nodemon --ignore flows/ --ignore lib/ --ignore public/ ./standalone.js ./flows/demo_messkonzept1.json",
     "standalone-messkonzept2": "nodemon --ignore flows/ --ignore lib/ --ignore public/ ./standalone.js ./flows/demo_messkonzept2.json"
