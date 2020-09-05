@@ -1,5 +1,7 @@
 module.exports = async function() {
   let instance = {};
+  instance.version = "0.9.6";
+
   instance.meterLib = require("./lib/meter.js");
   instance.server = async function(config) {
     const meterLib = instance.meterLib;
@@ -39,6 +41,7 @@ module.exports = async function() {
 
       app.post('/config',urlencodedParser,async function(req,res) {
           config = req.body;
+          fs.writeFileSync("./config.json",JSON.stringify(config));
           res.send();
       });
       if(typeof config.staticFiles == 'undefined') {
@@ -50,7 +53,7 @@ module.exports = async function() {
         delete msg.payload.latest;
         meterLib(msg,config,storage);
       },900000);
-      console.log("Serving http://localhost:"+port +"/");
+      console.log("Serving Casa-Corrently on http://localhost:"+port +"/");
       app.listen(port);
     };
 

@@ -1,5 +1,7 @@
 const CasaCorrently = require("./app.js");
 const fs = require("fs");
+let doupdates = true;
+
 
 const fileExists = async path => !!(await fs.promises.stat(path).catch(e => false));
 
@@ -22,8 +24,16 @@ const boot = async function() {
     config.uuid = Math.random(); // Due to node js incompatibility with nanoid or uuid this is a bad fix
     config.uuid = (""+config.uuid).substring(2) + (Math.random());
   }
+  if(typeof config.autoupdate !== 'undefined') {
+    doupdates = config.autoupdate;
+  }
   const main = await CasaCorrently();
   await main.server(config);
+  if(doupdates) {
+    const updater = require("simple-dependencies-updater");
+    updater();
+    setInterval(updater,43200000);
+  }
 };
 
 boot();

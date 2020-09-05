@@ -116,12 +116,10 @@ It is possible to run this node without Node-RED. It comes shipped with a expres
 
 ```shell
 git clone https://github.com/energychain/casa-corrently.git
-cd casa-corrently.git
+cd casa-corrently
 npm install
 npm start ./sample_config_messkonzept2.json
 ```
-
-![Prosumer Display](https://squad.stromdao.de/nextcloud/index.php/s/EjaBaya9WPgcRzw/preview)
 
 Online Demo (via Heroku):
 https://casa-corrently-demo.herokuapp.com/index.html

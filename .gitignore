@@ -107,3 +107,4 @@ dist
 # Corrently Specific
 gsidata/*
 skodata/*
+config.json
