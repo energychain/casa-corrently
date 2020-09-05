@@ -17,5 +17,6 @@
    "password":"aNPR66nGXQhZ",
    "stromkonto":"0x7866f187f30cd52Bdbd5c4184fD3ee6168Ae0dB4",
    "depot":"0x7866f187f30cd52Bdbd5c4184fD3ee6168Ae0dB4",
-   "community":"demo"
+   "community":"demo",
+   "autoupdate":"false"
 }
