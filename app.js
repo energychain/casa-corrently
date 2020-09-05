@@ -3,13 +3,17 @@ module.exports = async function() {
   instance.version = "0.9.7";
 
   instance.meterLib = require("./lib/meter.js");
-  instance.server = async function(config) {
+  instance.server = async function(config,logger) {
     const meterLib = instance.meterLib;
     const fs = require("fs");
     const express = require('express');
     const bodyParser = require('body-parser');
     const urlencodedParser = bodyParser.urlencoded({ extended: false });
     let port = 3000;
+
+    if(typeof logger !== 'undefined') {
+      config._logger = logger;
+    }
 
     const storage = {
       memstorage:{},
@@ -52,8 +56,9 @@ module.exports = async function() {
       setInterval(function() {
         delete msg.payload.latest;
         meterLib(msg,config,storage);
+        if(typeof logger !== 'undefined') logger.debug("Auto updated statistics");
       },900000);
-      console.log("Serving Casa-Corrently on http://localhost:"+port +"/");
+      if(typeof logger !== 'undefined') logger.info("Serving Casa-Corrently on http://localhost:"+port +"/");
       app.listen(port);
     };
 
