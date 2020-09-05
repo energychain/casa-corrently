@@ -1,1 +1,1 @@
-cmd: git add -A ; git commit -m "Auto Commit" -a ; git push origin master ; npm publish
+cmd: git add -A ; git commit -m "Auto Commit" -a ; git push origin master; git push heroku master; npm publish
