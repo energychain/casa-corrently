@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const CasaCorrently = require("./app.js");
 const fs = require("fs");
 const winston = require("winston");
