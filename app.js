@@ -1,6 +1,6 @@
 module.exports = async function() {
   let instance = {};
-  instance.version = "0.9.6";
+  instance.version = "0.9.7";
 
   instance.meterLib = require("./lib/meter.js");
   instance.server = async function(config) {
