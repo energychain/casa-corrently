@@ -29,11 +29,6 @@ const boot = async function() {
   }
   const main = await CasaCorrently();
   await main.server(config);
-  if(doupdates) {
-    const updater = require("simple-dependencies-updater");
-    updater();
-    setInterval(updater,43200000);
-  }
 };
 
 boot();
