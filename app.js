@@ -78,6 +78,7 @@ module.exports = async function() {
     }
 
     if(typeof config.port !== 'undefined') {
+      // TODO: add unit test if port is taken from config nor from environment
       port = config.port;
     }
     main(config);
