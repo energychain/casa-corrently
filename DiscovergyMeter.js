@@ -51,6 +51,10 @@ module.exports = function(RED) {
 
     RED.httpAdmin.get('/discovergy/meters', async (req, res) => {
           let config = RED.nodes.getNode(req.query.account);
+          if(config == null) {
+            console.log("*** You need to deploy your login credentials before you could retrieve available meters");
+            res.end(JSON.stringify([]));
+          } else {
            try {
                let meters = await axios.get("https://api.discovergy.com/public/v1/meters",{
                               auth: {
@@ -63,5 +67,6 @@ module.exports = function(RED) {
              console.log(error);
              res.sendStatus(500).send(error.message);
            }
+          }
     });
 };
