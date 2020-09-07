@@ -1,8 +1,20 @@
 # casa-corrently
-Allows to work with a smartmeters (Electricity only) within Node RED flows. If you do not have a Smart Meter you might get it [here from STROMDAO](https://www.corrently.de/transparenz/bestellung-smartmeter/) (Germany only).
+Casa-Corrently is an energy monitoring solution design to run from within a local network (home area network). It might be used either standalone, as Node-RED module or embedded into other applications.
+
+This core module is designed to work with smartmeters (Electricity only). If you do not have a Smart Meter you might get it [here from STROMDAO](https://www.corrently.de/transparenz/bestellung-smartmeter/) (Germany only).
 
 ![npm](https://img.shields.io/npm/dw/casa-corrently) [![Build Status](https://travis-ci.com/energychain/casa-corrently.svg?branch=master)](https://travis-ci.com/energychain/casa-corrently) [![Code Quality](https://www.code-inspector.com/project/12360/score/svg)](https://frontend.code-inspector.com/public/project/12360/casa-corrently/dashboard) [![chat](https://img.shields.io/badge/chat-support-brightgreen)](https://tawk.to/chat/5c53189451410568a109843f/default)
 
+## Sample Usage
+
+### Homescreen
+![Casa Corrently Homescreen](https://squad.stromdao.de/nextcloud/index.php/s/mK5Q5Px34q9cLwM/preview)
+
+### Energy Price statistics
+![Casa Corrently Strompreis](https://squad.stromdao.de/nextcloud/index.php/s/pgEeHSXLQYgZqRC/preview)
+
+### Community Screen
+![Casa Corrently Community](https://squad.stromdao.de/nextcloud/index.php/s/gWbbnw7SaqXiCsp/preview)
 
 ## Installation
 

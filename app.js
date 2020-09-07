@@ -3,6 +3,16 @@ module.exports = async function() {
   instance.version = "0.9.7";
 
   instance.meterLib = require("./lib/meter.js");
+  instance.listener = {};
+  instance.runner = -1;
+  instance.shutdown = function() {
+    try {
+      instance.listener.close();
+      clearInterval(instance.runner);
+    } catch(e) {
+      console.log("Failed to shutdown runner",e);
+    }
+  }
   instance.server = async function(config,logger) {
     const meterLib = instance.meterLib;
     const fs = require("fs");
@@ -27,7 +37,6 @@ module.exports = async function() {
 
     const main = async function(config) {
       let app = express();
-
       let msg = {
         payload: {},
         topic: 'statistics'
@@ -40,6 +49,8 @@ module.exports = async function() {
       });
 
       app.get('/config', async function (req, res) {
+          // caution circular structure with logger attached!
+          delete config._logger;
           res.send(config);
       });
 
@@ -53,13 +64,13 @@ module.exports = async function() {
       }
       app.use(express.static(config.staticFiles, {}));
 
-      setInterval(function() {
+      instance.runner = setInterval(function() {
         delete msg.payload.latest;
         meterLib(msg,config,storage);
         if(typeof logger !== 'undefined') logger.debug("Auto updated statistics");
       },900000);
       if(typeof logger !== 'undefined') logger.info("Serving Casa-Corrently on http://localhost:"+port +"/");
-      app.listen(port);
+      instance.listener = app.listen(port);
     };
 
     if(typeof process.env.PORT !== 'undefined') {
@@ -67,7 +78,7 @@ module.exports = async function() {
     }
 
     if(typeof config.port !== 'undefined') {
-      post = config.port;
+      port = config.port;
     }
     main(config);
   };

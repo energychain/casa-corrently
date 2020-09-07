@@ -1,9 +1,7 @@
 {
    "id":"da546890.0f3d38",
    "type":"Discovergy Meter",
-   "z":"5da85b17.007c04",
    "name":"Corrently Demozähler",
-   "account":"8e346a2e.007958",
    "meterId":"781ffa307e434529be9f747eece1b8dc",
    "firstReading":4614000,
    "firstReadingOut":3915000,
