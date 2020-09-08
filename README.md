@@ -12,6 +12,7 @@ This core module is designed to work with smartmeters (Electricity only). If you
     + [Energy Price statistics](#energy-price-statistics)
     + [Community Screen](#community-screen)
   * [Installation](#installation)
+    + [Standalone](#standalone)
     + [Node-RED (Node) via Shell](#node-red-node-via-shell)
     + [Node-RED (Node) via Editor](#node-red-node-via-editor)
   * [QuickStart](#quickstart)
@@ -51,6 +52,17 @@ https://stromdao.de/casa
 
 
 ## Installation
+
+### Standalone
+Standalone installation uses an express http server to provide a nice looking UI (see sample screens above).
+```shell
+git clone https://github.com/energychain/casa-corrently.git
+cd casa-corrently
+npm install
+```
+You will get the UI at http://localhost:3000/ pre-configured for one of our demo households.
+Copy `sample_config.json` to `config.json` and configure to your needs.
+
 
 ### Node-RED (Node) via Shell
 ```shell
