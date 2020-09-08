@@ -5,7 +5,39 @@ This core module is designed to work with smartmeters (Electricity only). If you
 
 ![npm](https://img.shields.io/npm/dw/casa-corrently) [![Build Status](https://travis-ci.com/energychain/casa-corrently.svg?branch=master)](https://travis-ci.com/energychain/casa-corrently) [![Code Quality](https://www.code-inspector.com/project/12360/score/svg)](https://frontend.code-inspector.com/public/project/12360/casa-corrently/dashboard) [![chat](https://img.shields.io/badge/chat-support-brightgreen)](https://tawk.to/chat/5c53189451410568a109843f/default)
 
+- [casa-corrently](#casa-corrently)
+  * [Sample Usage](#sample-usage)
+    + [Online Demo (via Heroku)](#online-demo-via-heroku)
+    + [Homescreen](#homescreen)
+    + [Energy Price statistics](#energy-price-statistics)
+    + [Community Screen](#community-screen)
+  * [Installation](#installation)
+    + [Node-RED (Node) via Shell](#node-red-node-via-shell)
+    + [Node-RED (Node) via Editor](#node-red-node-via-editor)
+  * [QuickStart](#quickstart)
+    + [Prerequisites](#prerequisites)
+    + [Corrently Demo Meter(s) - Full generation (Messkonzept1 - Volleinspeisung)](#corrently-demo-meters---full-generation-messkonzept1---volleinspeisung)
+    + [Corrently Demo Meter(s) - surplus feed-in (Messkonzept2 - Überschusseinspeisung)](#corrently-demo-meters---surplus-feed-in-messkonzept2---uberschusseinspeisung)
+    + [Accessing Demo](#accessing-demo)
+  * [Usage](#usage)
+    + [First time usage](#first-time-usage)
+    + [Modify time and reading of installation (optional)](#modify-time-and-reading-of-installation-optional)
+    + [Output (standard)](#output-standard)
+    + [Output with statistics (advanced)](#output-with-statistics-advanced)
+    + [Output with aggregation (advanced)](#output-with-aggregation-advanced)
+  * [Sample flows](#sample-flows)
+    + [Messkonzept 2 (Überschußeinspeisung) ohne Z2 (Produktionszähler)](#messkonzept-2-uberschusseinspeisung-ohne-z2-produktionszahler)
+  * [Standalone usage](#standalone-usage)
+    + [One Click Deployment](#one-click-deployment)
+  * [Funding](#funding)
+  * [Further reading](#further-reading)
+  * [Maintainer / Imprint](#maintainer--imprint)
+  * [LICENSE](#license)
+
 ## Sample Usage
+
+### [Online Demo (via Heroku)](https://stromdao.de/casa)
+https://stromdao.de/casa
 
 ### Homescreen
 ![Casa Corrently Homescreen](https://squad.stromdao.de/nextcloud/index.php/s/mK5Q5Px34q9cLwM/preview)
@@ -15,6 +47,8 @@ This core module is designed to work with smartmeters (Electricity only). If you
 
 ### Community Screen
 ![Casa Corrently Community](https://squad.stromdao.de/nextcloud/index.php/s/gWbbnw7SaqXiCsp/preview)
+
+
 
 ## Installation
 
@@ -132,9 +166,6 @@ cd casa-corrently
 npm install
 npm start ./sample_config_messkonzept2.json
 ```
-
-Online Demo (via Heroku):
-https://casa-corrently-demo.herokuapp.com/index.html
 
 By default the Web UI will be visible at http://localhost:3000/index.html
 
