@@ -1,6 +1,6 @@
-module.exports = async function() {
+module.exports = async function(cfg) {
   let instance = {};
-  instance.version = "0.9.7";
+  instance.version = "1.0.10";
 
   instance.meterLib = require("./lib/meter.js");
   instance.listener = {};
@@ -41,10 +41,12 @@ module.exports = async function() {
         payload: {},
         topic: 'statistics'
       };
+      let publisher = null;
 
       app.get('/msg', async function (req, res) {
           delete msg.payload.latest;
           const result = await meterLib(msg,config,storage);
+          if(publisher !== null) publisher.publish(result);
           res.send(result);
       });
 
@@ -64,9 +66,21 @@ module.exports = async function() {
       }
       app.use(express.static(config.staticFiles, {}));
 
-      instance.runner = setInterval(function() {
-        delete msg.payload.latest;
-        meterLib(msg,config,storage);
+      if(typeof config.publisher !== 'undefined') {
+        const PublisherLib = require(config.publisher);
+        console.log(PublisherLib);
+        publisher = PublisherLib(config);
+        await publisher.statics();
+        const result = await meterLib(msg,config,storage);
+        publisher.publish(result);
+      }
+      instance.runner = setInterval(async function() {
+        msg = {
+          payload: {},
+          topic: 'statistics'
+        };
+        const result = await meterLib(msg,config,storage);
+        if(publisher !== null) publisher.publish(result);
         if(typeof logger !== 'undefined') logger.debug("Auto updated statistics");
       },900000);
       if(typeof logger !== 'undefined') logger.info("Serving Casa-Corrently on http://localhost:"+port +"/");

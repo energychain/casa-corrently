@@ -185,6 +185,25 @@ By default the Web UI will be visible at http://localhost:3000/index.html
 Heroku:
 https://heroku.com/deploy?template=https://github.com/energychain/casa-corrently
 
+### IPFS Support (early beta!)
+It is possible access a Casa Corrently Instance via IPFS from remote. To do so you need to install `casa-corrently-ipfs-edge` and add an publisher entry into your `config.json`
+
+installation of IPFS publisher
+```shell
+cd casa-corrently
+npm install casa-corrently-ipfs-edge
+```
+In config.json
+```javascript
+{
+  ...
+  "publisher":"casa-corrently-ipfs-edge",
+  ...
+}
+```
+
+Restarting casa-corrently should provide you an ipfs URL of your `msg` objects.
+
 ## Funding
 This module is part of the Corrently Ecosystem which looks for funding in Germany:  https://www.stromdao.de/crowdfunding/info
 ![STROMDAO - Corrently Crowdfunding](https://squad.stromdao.de/nextcloud/index.php/s/Do4pzpM7KndZxAx/preview)
