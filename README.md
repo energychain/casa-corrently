@@ -50,7 +50,6 @@ https://stromdao.de/casa
 ![Casa Corrently Community](https://squad.stromdao.de/nextcloud/index.php/s/gWbbnw7SaqXiCsp/preview)
 
 
-
 ## Installation
 
 ### Standalone
@@ -203,6 +202,11 @@ In config.json
 ```
 
 Restarting casa-corrently should provide you an ipfs URL of your `msg` objects.
+
+You might use the following URLs from within the Webinterface:
+- `http://localhost:3000/p2p?method=ls` gives list of available peers
+- `http://localhost:3000/p2p?method=self` gives this peers infos
+- `http://localhost:3000/p2p?method=msg&peer=CID` msg object of a peer
 
 ## Funding
 This module is part of the Corrently Ecosystem which looks for funding in Germany:  https://www.stromdao.de/crowdfunding/info

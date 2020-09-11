@@ -73,6 +73,10 @@ module.exports = async function(cfg) {
         await publisher.statics();
         const result = await meterLib(msg,config,storage);
         publisher.publish(result);
+        app.get('/p2p', async function (req, res) {
+            // caution circular structure with logger attached!
+            res.send(await publisher.info(req.query));
+        });
       }
       instance.runner = setInterval(async function() {
         msg = {

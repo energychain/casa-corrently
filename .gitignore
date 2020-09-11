@@ -109,3 +109,4 @@ gsidata/*
 skodata/*
 config.json
 package.json.old
+configs/*
