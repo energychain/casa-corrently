@@ -39,7 +39,7 @@
   },
   "homepage": "https://casa.corrently.de/",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.20.0",
     "body-parser": "^1.19.0",
     "casa-corrently-ipfs-edge": "^1.0.3",
     "express": "^4.17.1",
