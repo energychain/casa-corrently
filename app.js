@@ -76,8 +76,9 @@ module.exports = async function(cfg) {
             // caution circular structure with logger attached!
             let timeout = true;
             setTimeout(async function() {
-              res.send(await publisher.info(req.query));
+              msg = await publisher.info(req.query);
               timeout = false;
+              res.send(msg);
             },10000);
             if(timeout) res.send({'err':'Timeout'});
         });
