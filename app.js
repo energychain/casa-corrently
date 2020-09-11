@@ -76,9 +76,9 @@ module.exports = async function(cfg) {
             // caution circular structure with logger attached!
             let timeout = true;
             setTimeout(async function() {
-              msg = await publisher.info(req.query);
+              let p2pcontent = await publisher.info(req.query);
               timeout = false;
-              res.send(msg);
+              res.send(p2pcontent);
             },10000);
             setTimeout(async function() {
               if(timeout) res.send({'err':'Timeout'});
