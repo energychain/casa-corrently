@@ -68,16 +68,18 @@ module.exports = async function(cfg) {
 
       if(typeof config.publisher !== 'undefined') {
         const PublisherLib = require(config.publisher);
-        console.log(PublisherLib);
         publisher = PublisherLib(config);
         await publisher.statics();
         const result = await meterLib(msg,config,storage);
         publisher.publish(result);
         app.get('/p2p', async function (req, res) {
             // caution circular structure with logger attached!
+            let timeout = true;
             setTimeout(async function() {
-            res.send(await publisher.info(req.query));
-            },20000);
+              res.send(await publisher.info(req.query));
+              timeout = false;
+            },10000);
+            if(timeout) res.send({'err':'Timeout'});
         });
       }
       instance.runner = setInterval(async function() {
