@@ -216,8 +216,6 @@ This module is part of the Corrently Ecosystem which looks for funding in German
 Further Documentation is available as Casa Corrently Chapter at: https://casa.corrently.de/books/nutzung-von-node-red/chapter/gr%C3%BCnstromz%C3%A4hler-%28discovergy-meter%29
 
 ## Maintainer / Imprint
-This module is not an official contribution by Discovergy GmbH.
-
 <addr>
 STROMDAO GmbH  <br/>
 Gerhard Weiser Ring 29  <br/>
