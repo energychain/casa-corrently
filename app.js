@@ -75,7 +75,9 @@ module.exports = async function(cfg) {
         publisher.publish(result);
         app.get('/p2p', async function (req, res) {
             // caution circular structure with logger attached!
+            setTimeout(async function() {
             res.send(await publisher.info(req.query));
+            },20000);
         });
       }
       instance.runner = setInterval(async function() {
