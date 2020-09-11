@@ -80,7 +80,9 @@ module.exports = async function(cfg) {
               timeout = false;
               res.send(msg);
             },10000);
-            if(timeout) res.send({'err':'Timeout'});
+            setTimeout(async function() {
+              if(timeout) res.send({'err':'Timeout'});
+            },10000);
         });
       }
       instance.runner = setInterval(async function() {
