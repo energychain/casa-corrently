@@ -74,15 +74,8 @@ module.exports = async function(cfg) {
         publisher.publish(result);
         app.get('/p2p', async function (req, res) {
             // caution circular structure with logger attached!
-            let timeout = true;
-            setTimeout(async function() {
               let p2pcontent = await publisher.info(req.query);
-              timeout = false;
               res.send(p2pcontent);
-            },10000);
-            setTimeout(async function() {
-              if(timeout) res.send({'err':'Timeout'});
-            },10000);
         });
       }
       instance.runner = setInterval(async function() {
