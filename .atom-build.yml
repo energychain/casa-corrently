@@ -1,1 +1,4 @@
 cmd: git add -A ; git commit -m "Auto Commit" -a ; git push origin master; npm publish
+targets:
+  update-screenshots:
+    cmd: "cd ../../percy/;./run.sh"

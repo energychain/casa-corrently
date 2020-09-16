@@ -3,7 +3,7 @@ Casa-Corrently is an energy monitoring solution design to run from within a loca
 
 This core module is designed to work with smartmeters (Electricity only). If you do not have a Smart Meter you might get it [here from STROMDAO](https://www.corrently.de/transparenz/bestellung-smartmeter/) (Germany only).
 
-![npm](https://img.shields.io/npm/dw/casa-corrently) [![Build Status](https://travis-ci.com/energychain/casa-corrently.svg?branch=master)](https://travis-ci.com/energychain/casa-corrently) [![Code Quality](https://www.code-inspector.com/project/12360/score/svg)](https://frontend.code-inspector.com/public/project/12360/casa-corrently/dashboard) [![chat](https://img.shields.io/badge/chat-support-brightgreen)](https://tawk.to/chat/5c53189451410568a109843f/default)
+![npm](https://img.shields.io/npm/dw/casa-corrently) [![Build Status](https://travis-ci.com/energychain/casa-corrently.svg?branch=master)](https://travis-ci.com/energychain/casa-corrently) [![Code Quality](https://www.code-inspector.com/project/12360/score/svg)](https://frontend.code-inspector.com/public/project/12360/casa-corrently/dashboard) [![This project is using Percy.io for visual regression testing.](https://percy.io/static/images/percy-badge.svg)](https://percy.io/c0972268/casa-corrently) [![chat](https://img.shields.io/badge/chat-support-brightgreen)](https://tawk.to/chat/5c53189451410568a109843f/default)
 
 - [casa-corrently](#casa-corrently)
   * [Sample Usage](#sample-usage)
