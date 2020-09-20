@@ -75,6 +75,8 @@ module.exports = async function(cfg) {
         app.get('/p2p', async function (req, res) {
             // caution circular structure with logger attached!
               let p2pcontent = await publisher.info(req.query);
+              // CORS make no sense for P2P!
+              res.header("Access-Control-Allow-Origin", "*");
               res.send(p2pcontent);
         });
       }
