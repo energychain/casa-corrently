@@ -46,7 +46,7 @@ module.exports = async function(cfg) {
       app.get('/msg', async function (req, res) {
           delete msg.payload.latest;
           const result = await meterLib(msg,config,storage);
-          if(publisher !== null) publisher.publish(result);
+          if(publisher !== null) publisher.publish(result,config.uuid);
           res.send(result);
       });
 
@@ -86,7 +86,7 @@ module.exports = async function(cfg) {
           topic: 'statistics'
         };
         const result = await meterLib(msg,config,storage);
-        if(publisher !== null) publisher.publish(result);
+        if(publisher !== null) publisher.publish(result,config.uuid);
         if(typeof logger !== 'undefined') logger.debug("Auto updated statistics");
       },900000);
       if(typeof logger !== 'undefined') logger.info("Serving Casa-Corrently on http://localhost:"+port +"/");
