@@ -2,3 +2,5 @@ cmd: git add -A ; git commit -m "Auto Commit" -a ; git push origin master; npm p
 targets:
   update-screenshots:
     cmd: "cd ../../percy/;./run.sh"
+  fully-deploy:
+    cmd: git add -A ; git commit -m "Auto Commit" -a ; git push origin master; npm publish; cd ../casa-corrently-webinterface; npm install --save casa-corrently; cd ../casa-corrently-openems; npm install --save casa-corrently;
