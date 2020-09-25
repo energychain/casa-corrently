@@ -56,11 +56,6 @@ module.exports = async function(cfg) {
           res.send(config);
       });
 
-      app.post('/config',urlencodedParser,async function(req,res) {
-          config = req.body;
-          fs.writeFileSync("./config.json",JSON.stringify(config));
-          res.send();
-      });
       if(typeof config.staticFiles == 'undefined') {
         config.staticFiles = './public';
       }
