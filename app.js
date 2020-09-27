@@ -90,7 +90,7 @@ module.exports = async function(cfg) {
       // Create a "temporary" static www directory to be patched by publisher later
       try
       {
-          await ncp(config.staticFiles,'./www',{
+          await ncp(config.staticFiles,'./www/',{
             dot:false,
             junk:false,
             overwrite:true,
