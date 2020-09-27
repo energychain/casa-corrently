@@ -95,10 +95,10 @@ module.exports = async function(cfg) {
             junk:false,
             overwrite:true,
           });
-          app.use('express.static("./www", {})');
+          app.use(express.static("./www", {}));
       } catch(e) {
         console.log('Using default statics',e);
-        app.use('express.static(config.staticFiles, {})');
+        app.use(express.static(config.staticFiles, {}));
       }
 
       if(typeof config.publisher !== 'undefined') {
