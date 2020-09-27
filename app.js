@@ -94,7 +94,7 @@ module.exports = async function(cfg) {
             dot:false,
             junk:false,
             overwrite:true,
-          }
+          });
           app.use('express.static("./www", {})');
       } catch(e) {
         console.log('Using default statics',e);
