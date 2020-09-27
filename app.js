@@ -17,7 +17,7 @@ module.exports = async function(cfg) {
   instance.server = async function(config,logger) {
     const meterLib = instance.meterLib;
     const fs = require("fs");
-    const ncp = require('ncp').ncp;
+    const ncp = require('recursive-copy');
     const express = require('express');
     const bodyParser = require('body-parser');
     const urlencodedParser = bodyParser.urlencoded({ extended: false });
@@ -88,14 +88,18 @@ module.exports = async function(cfg) {
       }
 
       // Create a "temporary" static www directory to be patched by publisher later
-      ncp(config.staticFiles,'./www',function(err) {
-        if(err) {
-          console.log('Unable to copy statics',err);
-          app.use('express.static(config.staticFiles, {})');
-        } else {
+      try
+      {
+          await ncp(config.staticFiles,'./www',{
+            dot:false,
+            junk:false,
+            overwrite:true,
+          }
           app.use('express.static("./www", {})');
-        }
-      });
+      } catch(e) {
+        console.log('Using default statics',e);
+        app.use('express.static(config.staticFiles, {})');
+      }
 
       if(typeof config.publisher !== 'undefined') {
         const PublisherLib = require(config.publisher);
