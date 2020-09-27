@@ -1,6 +1,7 @@
 module.exports = async function(cfg) {
   let instance = {};
   instance.version = "1.0.10";
+  instance.versions = {};
 
   instance.meterLib = require("./lib/meter.js");
   instance.listener = {};
@@ -20,7 +21,28 @@ module.exports = async function(cfg) {
     const bodyParser = require('body-parser');
     const urlencodedParser = bodyParser.urlencoded({ extended: false });
     let port = 3000;
+    const getVersions = async function() {
+        const fileExists = async path => !!(await fs.promises.stat(path).catch(e => false));
 
+        const checkVersionFS = async function(pname) {
+              if(await fileExists(pname)) {
+                let pkgjson = JSON.parse(fs.readFileSync(pname));
+                instance.versions[pkgjson.name] = {
+                  version:pkgjson.version,
+                  path:pname
+                }
+              }
+        }
+        checkVersionFS('./package.json');
+        checkVersionFS('node_modules/casa-corrently/package.json');
+        checkVersionFS('node_modules/casa-corrently-ipfs-bridge/package.json');
+        checkVersionFS('node_modules/casa-corrently-ipfs-edge/package.json');
+        checkVersionFS('node_modules/casa-corrently-openems/package.json');
+        checkVersionFS('node_modules/casa-corrently-webinterface/package.json');
+    }
+    setTimeout(function() {
+      getVersions();
+    },1000);
     if(typeof logger !== 'undefined') {
       config._logger = logger;
     }
@@ -54,6 +76,10 @@ module.exports = async function(cfg) {
           // caution circular structure with logger attached!
           delete config._logger;
           res.send(config);
+      });
+      app.get('/versions', async function (req, res) {
+          // caution circular structure with logger attached!
+          res.send(instance.versions);
       });
 
       if(typeof config.staticFiles == 'undefined') {
@@ -98,5 +124,6 @@ module.exports = async function(cfg) {
     }
     main(config);
   };
+
   return instance;
 };
