@@ -89,7 +89,12 @@ module.exports = async function(cfg) {
 
       // Create a "temporary" static www directory to be patched by publisher later
       ncp(config.staticFiles,'./www',function(err) {
-        app.use('express.static("./www", {})');
+        if(err) {
+          console.log('Unable to copy statics',err);
+          app.use('express.static(config.staticFiles, {})');
+        } else {
+          app.use('express.static("./www", {})');
+        }
       });
 
       if(typeof config.publisher !== 'undefined') {
