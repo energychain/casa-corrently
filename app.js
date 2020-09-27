@@ -17,6 +17,7 @@ module.exports = async function(cfg) {
   instance.server = async function(config,logger) {
     const meterLib = instance.meterLib;
     const fs = require("fs");
+    const ncp = require('ncp').ncp;
     const express = require('express');
     const bodyParser = require('body-parser');
     const urlencodedParser = bodyParser.urlencoded({ extended: false });
@@ -85,7 +86,11 @@ module.exports = async function(cfg) {
       if(typeof config.staticFiles == 'undefined') {
         config.staticFiles = './public';
       }
-      app.use(express.static(config.staticFiles, {}));
+
+      // Create a "temporary" static www directory to be patched by publisher later
+      ncp(config.staticFiles,'./www',function(err) {
+        app.use('express.static("./www", {})');
+      });
 
       if(typeof config.publisher !== 'undefined') {
         const PublisherLib = require(config.publisher);
