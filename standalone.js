@@ -26,10 +26,12 @@ const console = new winston.transports.Console();
 const fileExists = async path => !!(await fs.promises.stat(path).catch(e => false));
 
 const boot = async function() {
-  let config = {};
+  let config = {status:'loading'};
+
   if(typeof process.env.PORT !== 'undefined') {
     port = process.env.PORT;
   }
+
   // UUID Persistence
   if((process.argv.length == 3)&&(await fileExists(process.argv[2]))) {
     config = JSON.parse(fs.readFileSync(process.argv[2]));
@@ -39,7 +41,8 @@ const boot = async function() {
   } else
   if(await fileExists("./sample_config.json")) {
     config = JSON.parse(fs.readFileSync("./sample_config.json"));
-  }
+    }
+
   if(typeof config.uuid == 'undefined') {
     config.uuid = Math.random(); // Due to node js incompatibility with nanoid or uuid this is a bad fix
     config.uuid = (""+config.uuid).substring(2) + (Math.random());
@@ -48,10 +51,10 @@ const boot = async function() {
     doupdates = config.autoupdate;
   }
   logger.info("Starting Standalone");
-  logger.debug(config);
 
   const main = await CasaCorrently();
-  await main.server(config,logger);
+  await main.server(config);
+  //await main.server(config,logger);
 };
 
 boot();

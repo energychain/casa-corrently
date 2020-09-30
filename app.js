@@ -95,9 +95,9 @@ module.exports = async function(cfg) {
             junk:false,
             overwrite:true,
           });
-          app.use(express.static("./www", {}));
+          app.use(express.static("./www/", {}));
       } catch(e) {
-        console.log('Using default statics',e);
+        if(typeof logger !== 'undefined') logger.info('Using Defaiult static files');
         app.use(express.static(config.staticFiles, {}));
       }
 
@@ -124,7 +124,7 @@ module.exports = async function(cfg) {
         if(publisher !== null) publisher.publish(result,config.uuid);
         if(typeof logger !== 'undefined') logger.debug("Auto updated statistics");
       },900000);
-      if(typeof logger !== 'undefined') logger.info("Serving Casa-Corrently on http://localhost:"+port +"/");
+      if(typeof logger !== 'undefined') logger.info("Serving Casa-Corrently on http://localhost:"+port +"/ ");
       instance.listener = app.listen(port);
     };
 
