@@ -1,6 +1,6 @@
 module.exports = async function(cfg) {
   let instance = {};
-  instance.version = "1.0.10";
+  instance.version = "1.0.38";
   instance.versions = {};
 
   instance.meterLib = require("./lib/meter.js");
@@ -84,20 +84,21 @@ module.exports = async function(cfg) {
       });
 
       if(typeof config.staticFiles == 'undefined') {
-        config.staticFiles = './public';
+        config.staticFiles = '/./public';
       }
 
       // Create a "temporary" static www directory to be patched by publisher later
       try
       {
-          await ncp(config.staticFiles,'./www/',{
+          await ncp(__dirname+config.staticFiles,__dirname+'/www/',{
             dot:false,
             junk:false,
             overwrite:true,
           });
-          app.use(express.static("./www/", {}));
+          app.use(express.static(__dirname+"/www/", {}));
       } catch(e) {
-        if(typeof logger !== 'undefined') logger.info('Using Defaiult static files');
+        console.log(e);
+        if(typeof logger !== 'undefined') logger.info('Using Default static files');
         app.use(express.static(config.staticFiles, {}));
       }
 
