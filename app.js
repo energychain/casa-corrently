@@ -26,8 +26,15 @@ module.exports = async function(cfg) {
         const fileExists = async path => !!(await fs.promises.stat(path).catch(e => false));
 
         const checkVersionFS = async function(pname) {
-              if(await fileExists(pname)) {
-                let pkgjson = JSON.parse(fs.readFileSync(pname));
+              if(await fileExists(__dirname+'/'+pname)) {
+                let pkgjson = JSON.parse(fs.readFileSync(__dirname+'/'+pname));
+                instance.versions[pkgjson.name] = {
+                  version:pkgjson.version,
+                  path:pname
+                }
+              }
+              if(await fileExists(__dirname+'/../'+pname)) {
+                let pkgjson = JSON.parse(fs.readFileSync(__dirname+'/../'+pname));
                 instance.versions[pkgjson.name] = {
                   version:pkgjson.version,
                   path:pname
