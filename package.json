@@ -1,6 +1,6 @@
 {
   "name": "casa-corrently",
-  "version": "1.0.40",
+  "version": "1.0.41",
   "description": "Casa Corrently EcoSystem - Standalone and Node-RED",
   "main": "app.js",
   "scripts": {
