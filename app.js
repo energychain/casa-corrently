@@ -76,8 +76,13 @@ module.exports = async function(cfg) {
       app.get('/msg', async function (req, res) {
           delete msg.payload.latest;
           const result = await meterLib(msg,config,storage);
-          if(publisher !== null) publisher.publish(result,config.uuid);
-          res.send(result);
+          if(publisher !== null) {
+            let history = await publisher.publish(result,config.uuid);
+            result.localHistory = history;
+            res.send(result);
+          } else {
+            res.send(result);
+          }
       });
 
       app.get('/config', async function (req, res) {
