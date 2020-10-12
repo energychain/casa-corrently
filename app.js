@@ -77,6 +77,7 @@ module.exports = async function(cfg) {
           delete msg.payload.latest;
           const result = await meterLib(msg,config,storage);
           if(publisher !== null) {
+            res.header("Access-Control-Allow-Origin", "*");
             let history = await publisher.publish(result,config.uuid);
             result.localHistory = history;
             res.send(result);
