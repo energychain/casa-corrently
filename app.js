@@ -140,6 +140,13 @@ module.exports = async function(cfg) {
               res.header("Access-Control-Allow-Origin", "*");
               res.send(p2pcontent);
         });
+        app.get('/history', async function (req, res) {
+            // caution circular structure with logger attached!
+              let history = await publisher.history();
+              // CORS make no sense for P2P!
+              res.header("Access-Control-Allow-Origin", "*");
+              res.send(history);
+        });
       }
       instance.runner = setInterval(async function() {
         msg = {
