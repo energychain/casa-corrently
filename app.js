@@ -85,6 +85,18 @@ module.exports = async function(cfg) {
             res.send(result);
           }
       });
+      app.get('/history', async function (req, res) {
+          delete msg.payload.latest;
+          let result = {};
+          if(publisher !== null) {
+            res.header("Access-Control-Allow-Origin", "*");
+            let history = await publisher.history();
+            result = history;
+            res.send(result);
+          } else {
+            res.send(result);
+          }
+      });
 
       app.get('/config', async function (req, res) {
           // caution circular structure with logger attached!
