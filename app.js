@@ -20,6 +20,7 @@ module.exports = async function(cfg) {
     const ncp = require('recursive-copy');
     const express = require('express');
     const bodyParser = require('body-parser');
+    const axios = require('axios');
     const urlencodedParser = bodyParser.urlencoded({ extended: false });
     let port = 3000;
     const getVersions = async function() {
@@ -95,6 +96,17 @@ module.exports = async function(cfg) {
             res.send(result);
           } else {
             res.send(result);
+          }
+      });
+      app.get('/ipfs', async function (req, res) {
+          delete msg.payload.latest;
+          let result = {};
+          if(publisher !== null) {
+            res.header("Access-Control-Allow-Origin", "*");
+            const result = await axios.get('https://gateway.pinata.cloud/ipfs/'+req.query.cid);
+            res.send(result.data);
+          } else {
+            res.send([]);
           }
       });
 
