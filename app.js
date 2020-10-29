@@ -103,7 +103,7 @@ module.exports = async function(cfg) {
           let result = {};
           if(publisher !== null) {
             res.header("Access-Control-Allow-Origin", "*");
-            const result = await axios.get('https://gateway.pinata.cloud/ipfs/'+req.query.cid);
+            const result = await axios.get('https://gateway.ipfs.io/ipfs/'+req.query.cid);
             res.send(result.data);
           } else {
             res.send([]);
