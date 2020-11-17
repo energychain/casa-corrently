@@ -159,6 +159,13 @@ module.exports = async function(cfg) {
               res.header("Access-Control-Allow-Origin", "*");
               res.send(history);
         });
+      } else {
+        app.get('/p2p', async function (req, res) {
+              let p2pcontent = axios.get("https://casa-corrently.de/p2p");
+              // CORS make no sense for P2P!
+              res.header("Access-Control-Allow-Origin", "*");
+              res.send(p2pcontent.data);
+        });
       }
       instance.runner = setInterval(async function() {
         msg = {
